@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "sh scripts/build.sh",
+    "dev": "concurrently \"npm:client-dev\" \"npm:server-dev\"",
+    "client-dev": "sh scripts/dev.sh client",
+    "server-dev": "sh scripts/dev.sh client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
