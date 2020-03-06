@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../dist",
+    "module": "commonjs",
+    "paths": {
+      "@src": [
+        "./src"
+      ]
+    },
+    "skipLibCheck": true,
+  },
+  "include": [
+    "./**.ts",
+    "vendors.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/FUTURE_*",
+    "**/DEPRECATED_*"
+  ]
+}

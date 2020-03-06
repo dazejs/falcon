@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../dist/public",
+    "module": "commonjs",
+    "paths": {
+      "@src": [
+        "./src"
+      ]
+    }
+  },
+  "include": [
+    "./**.tsx",
+    "./**.ts",
+    "vendors.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/FUTURE_*",
+    "**/DEPRECATED_*"
+  ]
+}
