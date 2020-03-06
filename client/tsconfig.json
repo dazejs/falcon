@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "target": "ES6",
     "baseUrl": "./",
     "outDir": "../dist/public",
     "module": "commonjs",
@@ -8,7 +9,12 @@
       "@src": [
         "./src"
       ]
-    }
+    },
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "jsx": "react"
   },
   "include": [
     "./**.tsx",

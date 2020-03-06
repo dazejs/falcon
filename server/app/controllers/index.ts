@@ -4,6 +4,6 @@ import { Controller, route, http } from '@dazejs/framework';
 export class Hello extends Controller {
   @http.get()
   index() {
-    return 'hello';
+    return this.render('index.html');
   }
 }

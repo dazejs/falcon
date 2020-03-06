@@ -27,13 +27,21 @@ const config: webpack.Configuration = {
       {
         test: /\.(ts|tsx)$/,
         include: path.resolve(__dirname, '../client'),
-        loader: 'ts-loader'
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-react']
+            }
+          },
+          'ts-loader'
+        ]
       },
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, '../public/index.html'),
+      filename: path.resolve(__dirname, '../views/index.html'),
       template: path.resolve(__dirname, './tpl/index.html'),
       inject: true,
       alwaysWriteToDisk: true,
