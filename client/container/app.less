@@ -1,0 +1,38 @@
+#app, body, html {
+    height: 100%;
+}
+
+.layout-header-background {
+  background: #fff;
+}
+
+.logo {
+  position: relative;
+  padding: 0 24px;
+  overflow: hidden;
+  background: #001529;
+  cursor: pointer;
+  transition: all .3s;
+  a {
+      display: flex;
+      align-items: center;
+      height: 64px;
+  }
+  h1 {
+      display: inline-block;
+      margin: 0 0 0 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 20px;
+      vertical-align: middle;
+      animation: fade-in;
+      animation-duration: .3s;
+  }
+}
+
+.layout-side {
+    flex: 0 0 256px!important;
+    max-width: 256px!important;
+    min-width: 256px!important;
+    width: 256px!important;
+}

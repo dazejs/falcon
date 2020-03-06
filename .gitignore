@@ -1,5 +1,6 @@
 .vscode
 .idea
+yarn-error.json
 
 /node_modules
 /client/node_modules
