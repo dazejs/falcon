@@ -3,7 +3,9 @@
 }
 
 .layout-header-background {
-  background: #fff;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    z-index: 9;
 }
 
 .logo {
@@ -35,4 +37,30 @@
     max-width: 256px!important;
     min-width: 256px!important;
     width: 256px!important;
+}
+
+.ant-menu-dark .ant-menu-item-selected a, .ant-menu-dark .ant-menu-item-selected a:hover {
+    color: #fff;
+}
+
+.ant-layout, .ant-layout * {
+    box-sizing: border-box;
+}
+
+.breadcrumb-box {
+  font-size: 14px;
+  padding: 16px 24px;
+  background-color: #fff;
+  .breadcrumb-title {
+    color: rgba(0,0,0,.85);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+    margin-top: 8px;
+  }
+}
+.content-box {
+    margin: 24px 24px 0;
+    min-height: 100%;
+    transition: .3s;
 }

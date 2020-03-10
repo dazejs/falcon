@@ -20,7 +20,7 @@ const config: webpack.Configuration = {
   output: {
     path: path.resolve(__dirname, '../public/assets'),
     filename: isDev ? 'bundle.js' : '[name].[hash].js',
-    publicPath: 'http://localhost:8000/assets/'
+    publicPath: 'http://localhost:8001/assets/'
   },
   module: {
     exprContextCritical: false,
@@ -205,7 +205,7 @@ if (isDev) {
     contentBase: path.join(__dirname, '../views'),
     publicPath: '/assets/',
     hot: true,
-    port: 8000,
+    port: 8001,
     historyApiFallback: true,
     serveIndex: true
   };
