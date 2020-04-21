@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
-import { Breadcrumb, Card } from 'antd'
+import React, { useState } from 'react'
+import { Breadcrumb, Card, Statistic, Button, Modal } from 'antd'
 import { Link } from 'react-router-dom'
 import './index.less'
-import ReactEchartsCore from 'echarts-for-react/lib/core';
-import echarts from 'echarts/lib/echarts';
-import 'echarts/lib/chart/pie';
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
+// import ReactEchartsCore from 'echarts-for-react/lib/core';
+// import echarts from 'echarts/lib/echarts';
+// import 'echarts/lib/chart/pie';
+// import 'echarts/lib/component/tooltip';
+// import 'echarts/lib/component/title';
+import { PlusOutlined } from '@ant-design/icons'
 
 export default function () {
 
-  
+  const [isShowAppAddModal, setShowAppAddModal] = useState(false)
 
   return (
     <>
@@ -26,20 +27,22 @@ export default function () {
         </div>
       </div>
       <div className="content-box">
-        <Card title={"Dazejs"}>
+        <Card title={"Dazejs"} extra={
+          <a>详细信息</a>
+        }>
           <div className="app-box">
-            <div className="cpu item">
+            {/* <div className="cpu item">
               <ReactEchartsCore
                 echarts={echarts}
                 style={{
-                  width: 200,
-                  height: 200
+                  width: 100,
+                  height: 100
                 }}
                 option={{
-                  tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b}: {d}%'
-                  },
+                  // tooltip: {
+                  //   trigger: 'item',
+                  //   formatter: '{a} <br/>{b}: {d}%'
+                  // },
                   series: [
                     {
                       name: 'CPU 使用率',
@@ -55,7 +58,7 @@ export default function () {
                           show: true,
                           // formatter: '{b}:{d}%',
                           textStyle: {
-                            fontSize: '15',
+                            fontSize: '13',
                             fontWeight: 'bold'
                           }
                         }
@@ -70,14 +73,43 @@ export default function () {
               />
               <div className="tit">CPU 使用率</div>
               <div className="con">40%</div>
+            </div> */}
+            <div className="item">
+              <Statistic title="网络 - IN" suffix="kb/s" value="123"></Statistic>
             </div>
-            <div className="mem item">
-              <div className="tit">内存使用率</div>
-              <div className="con">50%</div>
+            <div className="item">
+              <Statistic title="网络 - OUT" suffix="kb/s" value="87"></Statistic>
+            </div>
+            <div className="item">
+              <Statistic title="CPU 使用率" suffix="%" value="60"></Statistic>
+            </div>
+            <div className="item">
+              <Statistic title="内存使用率" suffix="%" value="30"></Statistic>
+            </div>
+            <div className="item">
+              <Statistic title="磁盘使用率" suffix="%" value="10"></Statistic>
             </div>
           </div>
         </Card>
+        <Button type="dashed" style={{
+          width: '100%',
+          backgroundColor: '#eee',
+          marginTop: 20
+        }} onClick={() => {
+          setShowAppAddModal(true)
+        }}>
+          添加应用 <PlusOutlined/>
+        </Button>
       </div>
+      <Modal
+        title="添加应用"
+        visible={isShowAppAddModal}
+        onCancel={() => {
+          setShowAppAddModal(false)
+        }}
+      >
+
+      </Modal>
     </>
   )
 }

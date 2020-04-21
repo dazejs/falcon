@@ -1,3 +1,5 @@
+import { WebsocketServiceProvider } from '@dazejs/websocket-provider'
+
 export default {
   /**
    * debug mode
@@ -60,5 +62,7 @@ export default {
     /* ex: 404: 'errors/404.njk', root path: /views */
   },
 
-  providers: [],
+  providers: [
+    WebsocketServiceProvider
+  ],
 };
