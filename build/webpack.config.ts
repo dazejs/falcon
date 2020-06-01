@@ -44,7 +44,8 @@ const config: webpack.Configuration = {
                   useBuiltIns: 'usage',
                   corejs: 3
                 }], 
-                '@babel/preset-react'
+                '@babel/preset-react',
+                '@babel/preset-typescript'
               ],
               plugins: [
                 'syntax-dynamic-import',

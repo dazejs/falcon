@@ -1,12 +1,16 @@
-import { Controller, route, http } from '@dazejs/framework';
+import { Controller, rest, crossOrigin } from '@dazejs/framework';
 
-@route('/apps')
+@rest('/api/apps')
+@crossOrigin('*')
 export class App extends Controller {
-  /**
-   * 创建应用
-   */
-  @http.post()
   store() {
 
+  }
+
+  index() {
+    return [{
+      id: 1,
+      name: 'dazejs'
+    }]
   }
 }

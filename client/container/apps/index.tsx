@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import { Breadcrumb, Card, Statistic, Button, Modal } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Breadcrumb, Card, Statistic, Button, Modal, Form, Input } from 'antd'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import './index.less'
 // import ReactEchartsCore from 'echarts-for-react/lib/core';
 // import echarts from 'echarts/lib/echarts';
@@ -9,9 +10,51 @@ import './index.less'
 // import 'echarts/lib/component/title';
 import { PlusOutlined } from '@ant-design/icons'
 
+function useFetchAppApi () {
+  const [data, setData] = useState([]);
+  const [url] = useState(
+    'http://localhost:9797/api/apps',
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsError(false);
+      setIsLoading(true);
+
+      try {
+        const result = await axios.get(url);
+
+        console.log(result)
+
+        setData(result.data);
+      } catch (error) {
+        console.log(error)
+        setIsError(true);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [url]);
+
+  return { data, isLoading, isError };
+}
+
 export default function () {
 
   const [isShowAppAddModal, setShowAppAddModal] = useState(false)
+
+  const [appForm] = Form.useForm()
+
+  const { data } = useFetchAppApi() 
+
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
 
   return (
     <>
@@ -27,11 +70,68 @@ export default function () {
         </div>
       </div>
       <div className="content-box">
-        <Card title={"Dazejs"} extra={
-          <a>详细信息</a>
-        }>
-          <div className="app-box">
-            {/* <div className="cpu item">
+        {
+          data?.map((item: any) => {
+            return (
+              <Card title={item.name} key={item.id} extra={
+                <a>详细信息</a>
+              }>
+                <div className="app-box">
+
+                  <div className="item">
+                    <Statistic title="网络 - IN" suffix="kb/s" value="123"></Statistic>
+                  </div>
+                  <div className="item">
+                    <Statistic title="网络 - OUT" suffix="kb/s" value="87"></Statistic>
+                  </div>
+                  <div className="item">
+                    <Statistic title="CPU 使用率" suffix="%" value="60"></Statistic>
+                  </div>
+                  <div className="item">
+                    <Statistic title="内存使用率" suffix="%" value="30"></Statistic>
+                  </div>
+                  <div className="item">
+                    <Statistic title="磁盘使用率" suffix="%" value="10"></Statistic>
+                  </div>
+                </div>
+              </Card>
+            )
+          })
+        }
+        <Button type="dashed" style={{
+          width: '100%',
+          backgroundColor: '#eee',
+          marginTop: 20
+        }} onClick={() => {
+          setShowAppAddModal(true)
+        }}>
+          添加应用 <PlusOutlined/>
+        </Button>
+      </div>
+      <Modal
+        title="添加应用"
+        visible={isShowAppAddModal}
+        onCancel={() => {
+          setShowAppAddModal(false)
+        }}
+        onOk={() => {
+          appForm.submit()
+        }}
+      >
+        <Form {...layout} form={appForm} name="app-form" onFinish={(values) => {
+          console.log('Success:', values);
+        }}>
+          <Form.Item name="appname" label="应用名称" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
+  )
+}
+
+
+{/* <div className="cpu item">
               <ReactEchartsCore
                 echarts={echarts}
                 style={{
@@ -74,42 +174,3 @@ export default function () {
               <div className="tit">CPU 使用率</div>
               <div className="con">40%</div>
             </div> */}
-            <div className="item">
-              <Statistic title="网络 - IN" suffix="kb/s" value="123"></Statistic>
-            </div>
-            <div className="item">
-              <Statistic title="网络 - OUT" suffix="kb/s" value="87"></Statistic>
-            </div>
-            <div className="item">
-              <Statistic title="CPU 使用率" suffix="%" value="60"></Statistic>
-            </div>
-            <div className="item">
-              <Statistic title="内存使用率" suffix="%" value="30"></Statistic>
-            </div>
-            <div className="item">
-              <Statistic title="磁盘使用率" suffix="%" value="10"></Statistic>
-            </div>
-          </div>
-        </Card>
-        <Button type="dashed" style={{
-          width: '100%',
-          backgroundColor: '#eee',
-          marginTop: 20
-        }} onClick={() => {
-          setShowAppAddModal(true)
-        }}>
-          添加应用 <PlusOutlined/>
-        </Button>
-      </div>
-      <Modal
-        title="添加应用"
-        visible={isShowAppAddModal}
-        onCancel={() => {
-          setShowAppAddModal(false)
-        }}
-      >
-
-      </Modal>
-    </>
-  )
-}
